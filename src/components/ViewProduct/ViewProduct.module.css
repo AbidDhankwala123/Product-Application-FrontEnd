@@ -1,0 +1,40 @@
+.view_product_container {
+    background-color: white;
+    box-shadow: 0px 0px 30px 0px #00000026;
+    height: 80vh;
+    width: 60vw;
+    margin: 5% auto 0 auto;
+    padding: 0 2%;
+}
+
+.view_product_container>div:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 73vh;
+}
+
+.view_product_container>div>div:first-child {
+    width: 37vw;
+}
+
+.image {
+    height: 40vh;
+    width: 25vw;
+}
+
+.button {
+    color: white;
+    background-color: lightcoral;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    border: none;
+    height: 5vh;
+    width: 12vw;
+}
+
+.button_div {
+    display: flex;
+    justify-content: center;
+}
