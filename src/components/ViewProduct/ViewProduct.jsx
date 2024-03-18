@@ -19,6 +19,9 @@ const ViewProduct = () => {
       })
       .catch(error => {
         console.error(error);
+        if (error.response.status === 404 || error.response.status === 400) {
+          return navigate("/notFound");
+        }
         if (error.response.status === 401) {
           toast.error("Invalid Session or Session expired. Please Log In again", {
             position: "top-center",
@@ -39,8 +42,8 @@ const ViewProduct = () => {
 
   const handleEditProduct = () => navigate(`/edit_product/${productId}`);
 
-  if(!productData){
-    return <Loader/>
+  if (!productData) {
+    return <Loader />
   }
   return (
 
@@ -76,7 +79,7 @@ const ViewProduct = () => {
       <div className={styles.button_div}>
         <button className={styles.button} onClick={handleEditProduct}>Edit Product</button>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
 
 

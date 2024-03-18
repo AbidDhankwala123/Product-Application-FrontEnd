@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios"
 import styles from "./Login.module.css"
 
-const Login = ({ logoutMessage, setLogoutMessage,setRole }) => {
+const Login = ({ logoutMessage, setLogoutMessage, setRole }) => {
     let navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
@@ -19,34 +19,48 @@ const Login = ({ logoutMessage, setLogoutMessage,setRole }) => {
         password
     }
 
-    // const validateEmail = () => {
-    //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //     if (!emailRegex.test(email)) {
-    //         setErrorEmail("Please enter a valid email address");
-    //         return true;
-    //     }
-    //     setErrorEmail("");
-    //     return false;
-    // };
+    const validateEmail = () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            toast.error("Please enter a valid email address", {
+                position: "top-center",
+                autoClose: 2000
+            })
+            return true;
+        }
+        return false;
+    };
 
-    // const validatePassword = () => {
-    //     let regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-    //     if (regex.test(password) === false) {
-    //         setErrorPassword("Password must contain atleast 1 uppercase,1 lowercase,1 special symbol and 1 numeric and minimum 8 characters long");
-    //         return true;
-    //     }
-    //     setErrorPassword("");
-    //     return false;
+    const validatePassword = () => {
+        let regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+        if (regex.test(password) === false) {
+            toast.error("Password must contain atleast 1 uppercase,1 lowercase,1 special symbol and 1 numeric and minimum 8 characters long", {
+                position: "top-center",
+                autoClose: 2000
+            })
+            return true;
+        }
+        return false;
 
-    // }
+    }
+    const validateFields = () => {
+        if (!email || !password) {
+            toast.error("All fields are required", {
+                position: "top-center",
+                autoClose: 1000
+            })
+            return true;
+        }
+        return false;
+    }
     const handleSubmit = e => {
         e.preventDefault();
         if (loading) {
             return
         }
-        // if (validateEmail() || validatePassword()) {
-        //     return;
-        // }
+        if (validateFields() || validateEmail() || validatePassword()) {
+            return;
+        }
         setLoading(true);
 
         axios.post(`${process.env.REACT_APP_BACKEND_URL_FOR_AUTH}/login`, loginUserObject, { headers: { "Content-Type": "application/json" } })

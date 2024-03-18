@@ -63,6 +63,7 @@ const Dashboard = ({ setLogoutMessage, displaySuccess, setDisplaySuccess }) => {
         </div>
         <div>
           <span className={styles.profile}>PROFILE</span>
+          <span className={styles.reviews}>REVIEWS</span>
           <span className={styles.logout} onClick={handleLogout}>LOGOUT</span>
         </div>
       </nav>

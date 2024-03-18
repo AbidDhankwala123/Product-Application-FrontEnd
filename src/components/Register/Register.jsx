@@ -23,34 +23,48 @@ const Register = () => {
         role
     }
 
-    // const validateEmail = () => {
-    //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //     if (!emailRegex.test(email)) {
-    //         setErrorEmail("Please enter a valid email address");
-    //         return true;
-    //     }
-    //     setErrorEmail("");
-    //     return false;
-    // };
+    const validateEmail = () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            toast.error("Please enter a valid email address", {
+                position: "top-center",
+                autoClose: 2000
+            })
+            return true;
+        }
+        return false;
+    };
 
-    // const validatePassword = () => {
-    //     let regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-    //     if (regex.test(password) === false) {
-    //         setErrorPassword("Password must contain atleast 1 uppercase,1 lowercase,1 special symbol and 1 numeric and minimum 8 characters long");
-    //         return true;
-    //     }
-    //     setErrorPassword("");
-    //     return false;
+    const validatePassword = () => {
+        let regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+        if (regex.test(password) === false) {
+            toast.error("Password must contain atleast 1 uppercase,1 lowercase,1 special symbol and 1 numeric and minimum 8 characters long", {
+                position: "top-center",
+                autoClose: 2000
+            })
+            return true;
+        }
+        return false;
 
-    // }
+    }
+    const validateFields = () => {
+        if (!email || !password || !role) {
+            toast.error("All fields are required", {
+                position: "top-center",
+                autoClose: 1000
+            })
+            return true;
+        }
+        return false;
+    }
     const handleSubmit = e => {
         e.preventDefault();
         if (loading) {
             return
         }
-        // if (validateName() || validateEmail() || validatePassword()) {
-        //     return;
-        // }
+        if (validateFields() || validateEmail() || validatePassword()) {
+            return;
+        }
         setLoading(true);
 
         axios.post(`${process.env.REACT_APP_BACKEND_URL_FOR_AUTH}/register`, registerUserObject, { headers: { "Content-Type": "application/json" } })
@@ -89,11 +103,11 @@ const Register = () => {
                     <div className={styles.select_radio}>
                         <div>
                             <input type="radio" name="role" value="Admin" onChange={handleAdmin} />
-                            <span style={{marginLeft:"0.6rem",fontFamily: "var(--font-family-roboto)"}}>Admin</span>
+                            <span style={{ marginLeft: "0.6rem", fontFamily: "var(--font-family-roboto)" }}>Admin</span>
                         </div>
                         <div>
-                            <input type="radio" name="role" value="User" onChange={handleUser}/>
-                            <span style={{marginLeft:"0.6rem",fontFamily: "var(--font-family-roboto)"}}>Team Member</span>
+                            <input type="radio" name="role" value="User" onChange={handleUser} />
+                            <span style={{ marginLeft: "0.6rem", fontFamily: "var(--font-family-roboto)" }}>Team Member</span>
                         </div>
                     </div><br />
                     <div className={styles.button_container}>
@@ -101,7 +115,7 @@ const Register = () => {
                     </div>
                 </form><br />
 
-                <div style={{ textAlign: "center",fontFamily: "var(--font-family-roboto)" }} >
+                <div style={{ textAlign: "center", fontFamily: "var(--font-family-roboto)" }} >
                     <span className=''>Already have an account?</span> <Link to="/login" style={{ color: "black" }} >Sign In</Link>
                 </div>
             </div>

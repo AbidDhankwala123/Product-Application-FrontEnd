@@ -3,8 +3,9 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ViewProduct from "./components/ViewProduct/ViewProduct";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import EditProduct from "./components/EditProduct/EditProduct";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   const [logoutMessage, setLogoutMessage] = useState("");
@@ -20,6 +21,7 @@ function App() {
           <Route path={role && role === "Admin" ? "/dashboard/admin" : "/dashboard/team_member"} element={<Dashboard setLogoutMessage={setLogoutMessage} displaySuccess={displaySuccess} setDisplaySuccess={setDisplaySuccess} />} />
           <Route path="/view_product/:productId" element={<ViewProduct />} />
           <Route path="/edit_product/:productId" element={<EditProduct role={role} setDisplaySuccess={setDisplaySuccess} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -36,19 +36,22 @@
 .application,
 .logout,
 .product_name_price,
-.profile {
+.profile,
+.reviews {
     font-weight: bolder;
     font-family: var(--font-family-roboto);
 }
 
 .logout,
-.profile {
+.profile,
+.reviews {
     cursor: pointer;
     color: #474444;
 }
 
 .logout:hover,
-.profile:hover {
+.profile:hover,
+.reviews:hover {
     text-decoration: underline;
 }
 

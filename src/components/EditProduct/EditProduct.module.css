@@ -36,6 +36,7 @@
     height: 15vh;
     width: 25vw;
     resize: none;
+    padding-top: 2%;
     padding-left: 2%;
     font-family: var(--font-family-roboto);
     border: 2px solid #C2C2C2;

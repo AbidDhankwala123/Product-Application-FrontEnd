@@ -23,7 +23,16 @@ const EditProduct = ({ setDisplaySuccess, role }) => {
         department,
         productDescription,
     };
-
+    const validateFields = () => {
+        if (!productName || !image || !price || !department || !productDescription) {
+            toast.error("All fields are required", {
+                position: "top-center",
+                autoClose: 1000
+            })
+            return true;
+        }
+        return false;
+    }
     useEffect(() => {
         if (productId) {
             axios.get(`${process.env.REACT_APP_BACKEND_URL_FOR_PRODUCTS}/${productId}`, {
@@ -43,6 +52,9 @@ const EditProduct = ({ setDisplaySuccess, role }) => {
                 })
                 .catch(error => {
                     console.error(error);
+                    if (error.response.status === 404 || error.response.status === 400) {
+                        return navigate("/notFound");
+                    }
                     if (error.response.status === 401) {
                         toast.error("Invalid Session or Session expired. Please Log In again", {
                             position: "top-center",
@@ -66,6 +78,9 @@ const EditProduct = ({ setDisplaySuccess, role }) => {
         e.preventDefault();
         if (loading) {
             return
+        }
+        if (validateFields()) {
+            return;
         }
         setLoading(true);
         axios.put(`${process.env.REACT_APP_BACKEND_URL_FOR_PRODUCTS}/${productId}`, productDetailsObject, {
@@ -97,6 +112,7 @@ const EditProduct = ({ setDisplaySuccess, role }) => {
                     position: "top-center",
                     autoClose: 2000
                 });
+                setLoading(false);
             })
     };
 
@@ -130,6 +146,7 @@ const EditProduct = ({ setDisplaySuccess, role }) => {
                     <button className={`${styles.btns} ${styles.updateProduct_btn}`}>{loading ? "Please Wait..." : "Update Product"}</button>
                 </div>
             </form>
+            <ToastContainer/>
         </div>
     )
 }
