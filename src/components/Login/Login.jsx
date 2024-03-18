@@ -63,7 +63,7 @@ const Login = ({ logoutMessage, setLogoutMessage, setRole }) => {
         }
         setLoading(true);
 
-        axios.post(`${process.env.REACT_APP_BACKEND_URL_FOR_AUTH}/login`, loginUserObject, { headers: { "Content-Type": "application/json" } })
+        axios.post(`${process.env.REACT_APP_BACKEND_URL_FOR_AUTH}login`, loginUserObject, { headers: { "Content-Type": "application/json" } })
             .then(response => {
                 toast.success(response.data.message, {
                     position: "top-center",
