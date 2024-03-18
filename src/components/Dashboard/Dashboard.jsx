@@ -54,6 +54,11 @@ const Dashboard = ({ setLogoutMessage, displaySuccess, setDisplaySuccess }) => {
   if (!productData) {
     return <Loader />
   }
+
+  const handleAlert = () => {
+    alert("I was not able to create UI for Reviews and Profile page, due to time inconvenience");
+  };
+
   return (
     <div className={styles.dahboard_container}>
       <nav className={styles.navbar}>
@@ -62,8 +67,8 @@ const Dashboard = ({ setLogoutMessage, displaySuccess, setDisplaySuccess }) => {
           <p className={styles.application}>Application</p>
         </div>
         <div>
-          <span className={styles.profile}>PROFILE</span>
-          <span className={styles.reviews}>REVIEWS</span>
+          <span className={styles.profile} onClick={handleAlert}>PROFILE</span>
+          <span className={styles.reviews} onClick={handleAlert}>REVIEWS</span>
           <span className={styles.logout} onClick={handleLogout}>LOGOUT</span>
         </div>
       </nav>

@@ -111,7 +111,7 @@ const Login = ({ logoutMessage, setLogoutMessage, setRole }) => {
                         <input type="email" name="email" placeholder='Email' value={email} onChange={handleEmail} className={styles.input} />
                     </div><br />
                     <div>
-                        <input type="text" name="password" placeholder='Password' value={password} onChange={handlePassword} className={styles.input} />{/*later change type to password*/}
+                        <input type="password" name="password" placeholder='Password' value={password} onChange={handlePassword} className={styles.input} />{/*later change type to password*/}
                     </div><br />
                     <div className={styles.button_container}>
                         <button className={styles.button}>{loading ? "Please Wait..." : "Login"}</button>
